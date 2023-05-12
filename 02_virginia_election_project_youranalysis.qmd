@@ -34,8 +34,15 @@ joined_vacomparison <- readRDS(here("processed_data", "joined_vacomparison.rds")
 
 
 ```{r}
-
 head(joined_vacomparison)
 
+```
+
+
+```{r}
+
+joined_vacomparison %>% 
+  count (mc_overperform > 0)
+  count (yk_overperform > 0)
 
 ```

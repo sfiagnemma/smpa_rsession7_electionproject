@@ -1,6 +1,6 @@
 ---
 title: "Virginia Election Project"
-author: "putyournamehere"
+author: "Sara Iagnemma"
 execute:
   echo: true
 format:
@@ -325,20 +325,26 @@ Where should we go from here....? Give it a shot...
 
 ```{r}
 
+joined_vacomparison <-joined_vacomparison %>% 
+  mutate(
+   mc_overperform = pct_mcauliffe - biden_pct,
+   yk_overperform = pct_youngkin - trump_pct,
 
-
-```
-
-
-```{r}
-
-
+  )
 
 ```
 
 
 ```{r}
 
+   saveRDS(joined_vacomparison, here("processed_data", "joined_vacomparison.rds"))
+  write_csv(joined_vacomparison, here("processed_data", "joined_vacomparison.csv"))
+
+```
+
+
+```{r}
+joined_vacomparison <- readRDS(here("processed_data","joined_vacomparison.rds"))
 
 
 ```
