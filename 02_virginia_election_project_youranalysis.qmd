@@ -31,8 +31,6 @@ joined_vacomparison <- readRDS(here("processed_data", "joined_vacomparison.rds")
 
 # Comparing Virgnia Gov vs. Prez
 
-
-
 ```{r}
 head(joined_vacomparison)
 
@@ -42,7 +40,37 @@ head(joined_vacomparison)
 ```{r}
 
 joined_vacomparison %>% 
-  count (mc_overperform > 0)
-  count (yk_overperform > 0)
+  count(joined_vacomparison, yk_overperform > 0)
 
 ```
+
+```{r}
+
+joined_vacomparison %>% 
+  count(joined_vacomparison, yk_overperform > 0)
+
+```
+
+
+Interestingly, it appears that McAuliffe performed worse than Biden in every single locality, while Youngkin performed better than Trump in every locality. 
+
+
+```{r}
+bidenWs <- joined_vacomparison %>% 
+  filter(biden_pct > 50) %>% 
+  count()
+
+youngkinWs <- joined_vacomparison %>% 
+  filter(pct_youngkin > 50) %>% 
+  count()
+
+youngkinFlips <- joined_vacomparison %>% 
+  filter(pct_youngkin >50) %>% 
+  filter (biden_pct > 50) %>% 
+  count()
+
+```
+
+Biden won `r bidenWs` districts. 
+Youngkin won `r youngkinWs` districts. 
+Youngkin flipped `r youngkinFlips` districts which had previously voted for Biden.
